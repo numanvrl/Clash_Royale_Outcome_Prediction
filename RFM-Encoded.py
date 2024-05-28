@@ -10,7 +10,7 @@ import time
 
 # Load the data
 start_time = time.time()  # Record start time
-data = pd.read_excel('player_battle_logs-output.xlsx')
+data = pd.read_excel('player_battle_logs.xlsx')
 end_time = time.time()  # Record end time
 loading_time = end_time - start_time  # Calculate loading time
 print("Data Loading Time:", loading_time, "seconds")
