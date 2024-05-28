@@ -17,6 +17,6 @@ response = requests.request("GET", url, headers=headers)
 tag_df = pd.DataFrame({'tag': [item['tag'][1:] for item in response.json()['items']]})
 
 # Save DataFrame to Excel file
-tag_df.to_excel('clan_tags-11-15.xlsx', index=False)
+tag_df.to_excel('clan_members_tags.xlsx', index=False)
 
 print("Excel file with clan tags saved successfully.")
