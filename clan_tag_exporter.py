@@ -8,7 +8,7 @@ import pandas as pd
 
 url = "https://proxy.royaleapi.dev/v1/clans?minMembers=11&maxMembers=15&limit=1000&minScore=1"
 headers = {
-    'Authorization': "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6Ijk0NTdjOTk2LWNjNWEtNDY1Ny1iM2QxLWIwMjYyYTgyMjRlMCIsImlhdCI6MTcxMDI2NDQ0OCwic3ViIjoiZGV2ZWxvcGVyL2NlMGYwMWY2LTcxNTgtMTIxMS1mNzgwLWYwZTA3MjFkMGIxNCIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI0NS43OS4yMTguNzkiXSwidHlwZSI6ImNsaWVudCJ9XX0.qxJlx8GqxruPCMHhMGo9NrLCEO1Ia3VufLCTDGHN9XqFf9ZTyHArgMKw6G5H9VE32FzH-EEmxVI6jih7UvrAPA",
+    'Authorization': "Bearer [Your API Key without the brackets]",
     'Accept' : "application/json"
 }
 response = requests.request("GET", url, headers=headers)

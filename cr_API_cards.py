@@ -62,7 +62,7 @@ for index, row in player_tags_df.iterrows():
     player_tag = row['tag']
     url = f"https://proxy.royaleapi.dev/v1/players/%23{player_tag}/battlelog"
     headers = {
-        'Authorization': "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjVhYWNiNGE0LWZlNGEtNDY5Yi1hYTA4LTZmZDIxM2UyODEzYiIsImlhdCI6MTcxMDI1NTA0OCwic3ViIjoiZGV2ZWxvcGVyL2NlMGYwMWY2LTcxNTgtMTIxMS1mNzgwLWYwZTA3MjFkMGIxNCIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI0NS43OS4yMTguNzkiXSwidHlwZSI6ImNsaWVudCJ9XX0.XQmydpjpBP7RbF7HTFaR6I0A4YpQWHi4NwTkfVmyOjgNgtnYRKWQKLx7xHTvaoym1YMZhmhWuHsAKRIHjWJQeg",
+        'Authorization': "Bearer [Your API Key without the brackets]",
         'Accept': "application/json"
     }
     
