@@ -10,7 +10,7 @@ from sklearn.decomposition import PCA
 from sklearn.calibration import calibration_curve
 
 # Load the data
-data = pd.read_excel('player_battle_logs-output.xlsx')
+data = pd.read_excel('player_battle_logs.xlsx')
 
 # Check the distribution of Outcome classes
 print("Distribution of Outcome classes:")
