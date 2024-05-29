@@ -5,7 +5,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, r2_score, confusion_matrix, accuracy_score, recall_score, precision_score
+from sklearn.metrics import mean_squared_error, r2_score, confusion_matrix, accuracy_score, recall_score, precision_score, f1_score
 import seaborn as sns
 
 # Load the data from Excel file
@@ -54,17 +54,19 @@ conf_matrix = confusion_matrix(y_test, binary_predictions)
 accuracy = accuracy_score(y_test, binary_predictions)
 recall = recall_score(y_test, binary_predictions, average='macro')
 precision = precision_score(y_test, binary_predictions, average='macro')
+f1 = f1_score(y_test, binary_predictions, average='macro')
 
 print("Confusion Matrix:\n", conf_matrix)
 print("Accuracy:", accuracy)
 print("Recall:", recall)
 print("Precision:", precision)
+print("F1 Score:", f1)
 
 # Plotting the evaluation metrics
-metrics = {'Mean Squared Error': mse, 'R-squared': r2, 'Accuracy': accuracy, 'Recall': recall, 'Precision': precision}
+metrics = {'Mean Squared Error': mse, 'R-squared': r2, 'Accuracy': accuracy, 'Recall': recall, 'Precision': precision, 'F1 Score': f1}
 
 plt.figure(figsize=(12, 6))
-plt.bar(metrics.keys(), metrics.values(), color=['blue', 'green', 'orange', 'red', 'purple'])
+plt.bar(metrics.keys(), metrics.values(), color=['blue', 'green', 'orange', 'red', 'purple', 'cyan'])
 plt.xlabel('Metrics')
 plt.ylabel('Scores')
 plt.title('Evaluation Metrics')
