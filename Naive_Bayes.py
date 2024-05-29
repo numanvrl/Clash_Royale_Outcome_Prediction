@@ -1,88 +1,74 @@
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.naive_bayes import GaussianNB
+from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
-import matplotlib.pyplot as plt
-import time
+from sklearn.impute import SimpleImputer
 
-# Load the data
-start_time = time.time()  # Record start time
-data = pd.read_excel('player_battle_logs.xlsx')
-end_time = time.time()  # Record end time
-loading_time = end_time - start_time  # Calculate loading time
-print("Data Loading Time:", loading_time, "seconds")
-
-# Data cleaning
-# For simplicity, let's assume there are no missing values or outliers in this example
-
-# Feature engineering (if needed)
-# You can create new features or transform existing ones here
+# Load the data from Excel file
+data = pd.read_excel('player_battle_logs-outcome.xlsx')
 
 # Split features and target variable
 X = data.drop(columns=['Outcome'])
 y = data['Outcome']
 
-# Define categorical and numerical features
 features = X.columns.tolist()
 
 # Preprocessing pipeline
 preprocessor = ColumnTransformer(
     transformers=[
-        ('num', StandardScaler(), features)
+        ('num', SimpleImputer(strategy='mean'), features),  # Impute missing values in numerical features with mean
     ])
 
-# Define the Random Forest model
-rf_model = RandomForestClassifier()
-
-# Create the Random Forest pipeline
-rf_pipeline = Pipeline(steps=[('preprocessor', preprocessor),
-                              ('classifier', rf_model)])
-
-# Train-Test data split
-start_time = time.time()  # Record start time
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
-end_time = time.time()  # Record end time
-splitting_time = end_time - start_time  # Calculate splitting time
-print("Train-Test Splitting Time:", splitting_time, "seconds")
-
 # Define the model
-naive_bayes_model = GaussianNB()
+model = SVC(kernel='rbf')  # Support Vector Machine with Radial Basis Function (RBF) kernel
 
-# Create the full pipeline with Naive Bayes classifier
-naive_bayes_pipeline = Pipeline(steps=[('preprocessor', preprocessor),
-                                      ('classifier', naive_bayes_model)])
+# Create the full pipeline
+pipeline = Pipeline(steps=[('preprocessor1', preprocessor),
+                           ('classifier1', model)])
 
-# Fit the Naive Bayes model
-start_time = time.time()  # Record start time
-naive_bayes_pipeline.fit(X_train, y_train)
-end_time = time.time()  # Record end time
-nb_training_time = end_time - start_time  # Calculate training time for Naive Bayes
-print("Naive Bayes Model Training Time:", nb_training_time, "seconds")
+# Train-test split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
-# Predictions using Naive Bayes model
-nb_predictions = naive_bayes_pipeline.predict(X_test)
+# Fit the model
+pipeline.fit(X_train, y_train)
 
-# Calculate accuracy for Naive Bayes
-nb_accuracy = accuracy_score(y_test, nb_predictions)
-print("Naive Bayes Accuracy:", nb_accuracy)
+# Make predictions
+predictions = pipeline.predict(X_test)
 
-# Calculate precision for Naive Bayes
-nb_precision = precision_score(y_test, nb_predictions, average='weighted')
-print("Naive Bayes Precision:", nb_precision)
+# Evaluate the model
+accuracy = accuracy_score(y_test, predictions)
+precision = precision_score(y_test, predictions, average='weighted')
+recall = recall_score(y_test, predictions, average='weighted')
+f1 = f1_score(y_test, predictions, average='weighted')
+conf_matrix = confusion_matrix(y_test, predictions)
 
-# Calculate recall for Naive Bayes
-nb_recall = recall_score(y_test, nb_predictions, average='weighted')
-print("Naive Bayes Recall:", nb_recall)
+print("Accuracy:", accuracy)
+print("Precision:", precision)
+print("Recall:", recall)
+print("F1-score:", f1)
+print("Confusion Matrix:")
+print(conf_matrix)
 
-# Calculate F1-score for Naive Bayes
-nb_f1 = f1_score(y_test, nb_predictions, average='weighted')
-print("Naive Bayes F1-score:", nb_f1)
+# Plotting the evaluation metrics
+metrics = {'Accuracy': accuracy, 'Precision': precision, 'Recall': recall, 'F1-score': f1}
 
-# Calculate confusion matrix for Naive Bayes
-nb_conf_matrix = confusion_matrix(y_test, nb_predictions)
-print("Naive Bayes Confusion Matrix:")
-print(nb_conf_matrix)
+plt.figure(figsize=(10, 5))
+plt.bar(metrics.keys(), metrics.values(), color=['blue', 'green', 'red', 'purple'])
+plt.xlabel('Metrics')
+plt.ylabel('Scores')
+plt.title('Evaluation Metrics')
+plt.ylim([0, 1])
+plt.show()
+
+# Plotting the confusion matrix
+plt.figure(figsize=(8, 6))
+sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', cbar=False, xticklabels=['Predicted Negative', 'Predicted Positive'], yticklabels=['Actual Negative', 'Actual Positive'])
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.title('Confusion Matrix')
+plt.show()
