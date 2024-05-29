@@ -8,7 +8,7 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 from sklearn.impute import SimpleImputer
 
 # Load the data from Excel file
-data = pd.read_excel('player_battle_logs.xlsx')
+data = pd.read_excel('player_battle_logs-outcome.xlsx')
 
 # Split features and target variable
 X = data.drop(columns=['Outcome'])
