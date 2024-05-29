@@ -4,10 +4,10 @@ def compare_columns(input_file, output_file):
     workbook = openpyxl.load_workbook(input_file)
     sheet = workbook.active
         
-    # Add a new column header
+    # Adds a new column header
     sheet.cell(row=1, column=3, value='Outcome')
     
-    # Iterate through rows
+    # Iterates through rows
     for row_idx, row in enumerate(sheet.iter_rows(min_row=2, max_col=2, max_row=sheet.max_row, values_only=True), start=2):
         first_value = row[0]
         second_value = row[1]
@@ -22,7 +22,6 @@ def compare_columns(input_file, output_file):
             sheet.cell(row=row_idx, column=3, value=2)
             print("added 2")             
 
-    # Save the workbook
     workbook.save(output_file)
 
 # Example usage:
