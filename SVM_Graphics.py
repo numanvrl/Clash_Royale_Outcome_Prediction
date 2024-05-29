@@ -90,3 +90,14 @@ plt.ylabel('True Positive Rate')
 plt.title('ROC Curve for Multiclass')
 plt.legend(loc="lower right")
 plt.show()
+
+# Plotting the evaluation metrics
+metrics = {'Accuracy': accuracy, 'Precision': precision, 'Recall': recall, 'F1-score': f1}
+
+plt.figure(figsize=(10, 5))
+plt.bar(metrics.keys(), metrics.values(), color=['blue', 'green', 'red', 'purple'])
+plt.xlabel('Metrics')
+plt.ylabel('Scores')
+plt.title('Evaluation Metrics')
+plt.ylim([0, 1])
+plt.show()
