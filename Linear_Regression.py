@@ -8,7 +8,6 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score, confusion_matrix, accuracy_score, recall_score, precision_score, f1_score
 import seaborn as sns
 
-# Load the data from Excel file
 data = pd.read_excel('player_battle_logs-outcome.xlsx')
 
 # Split features and target variable
