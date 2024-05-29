@@ -11,7 +11,7 @@ from sklearn.preprocessing import label_binarize
 from itertools import cycle
 
 # Load the data from Excel file
-data = pd.read_excel('player_battle_logs-outcome-deneme.xlsx')
+data = pd.read_excel('player_battle_logs-outcome.xlsx')
 
 # Split features and target variable
 X = data.drop(columns=['Outcome'])
